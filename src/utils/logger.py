@@ -18,7 +18,6 @@ class Logger:
             try:
                 logfire.configure(token=LOGFIRE_TOKEN)
                 print(f"Logfire configured with token: {LOGFIRE_TOKEN[:5]}...{LOGFIRE_TOKEN[-5:]}")
-                print("Logfire project URL: https://logfire-us.pydantic.dev/cnguyen1494/starter-project")
                 
                 # Kiểm tra kết nối Logfire
                 logfire.info("Application started", service=LOGFIRE_SERVICE_NAME)
