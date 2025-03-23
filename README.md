@@ -36,7 +36,7 @@ agent/
 1. Clone dự án:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/cnguyen14/Claude_AI_Agent.git
 cd agent
 ```
 
