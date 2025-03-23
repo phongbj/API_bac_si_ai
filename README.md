@@ -192,7 +192,7 @@ uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --reload
 
 ### Ví dụ sử dụng API
 
-#### Sử dụng với Python và requests
+#### Sử dụng với Python và requests (sử dụng trong folder tests)
 
 ```python
 import requests
@@ -228,11 +228,13 @@ def chat_with_claude(message, session_id=None):
 
 # Sử dụng hàm
 message = "Xin chào, bạn là ai?"
+print("YOU: ", message)
 response, session_id = chat_with_claude(message)
 print(f"Claude: {response}")
 
 # Tiếp tục hội thoại với cùng một session_id
 follow_up = "Bạn có thể giúp tôi viết một đoạn mã Python để tính giai thừa không?"
+print("YOU: ", follow_up)
 response, _ = chat_with_claude(follow_up, session_id)
 print(f"Claude: {response}")
 ```
