@@ -115,10 +115,7 @@ uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --reload
         "role": "user",
         "content": "Xin chào, bạn là ai?"
       }
-    ],
-    "session_id": "optional-session-id",
-    "prompt_type": "default",
-    "system_prompt": "Optional custom system prompt"
+    ]
   }
   ```
 - **Response**:
@@ -159,35 +156,11 @@ uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --reload
         "role": "assistant",
         "content": "Xin chào! Tôi có thể giúp gì cho bạn?"
       }
-    ],
-    "config": {
-      "system_prompt": "Bạn là một trợ lý AI hữu ích..."
-    }
+    ]
   }
   ```
 
-#### 5. Update System Prompt
-
-- **URL**: `/sessions/{session_id}/prompt`
-- **Method**: `PUT`
-- **Mô tả**: Cập nhật system prompt cho một phiên làm việc
-- **Request Body**:
-  ```json
-  {
-    "system_prompt": "Bạn là một trợ lý AI chuyên về lập trình..."
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "session_id": "session-uuid",
-    "config": {
-      "system_prompt": "Bạn là một trợ lý AI chuyên về lập trình..."
-    }
-  }
-  ```
-
-#### 6. Delete Session
+#### 5. Delete Session
 
 - **URL**: `/sessions/{session_id}`
 - **Method**: `DELETE`
@@ -200,7 +173,7 @@ uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --reload
   }
   ```
 
-#### 7. Get Available Prompts
+#### 6. Get Available Prompts
 
 - **URL**: `/prompts`
 - **Method**: `GET`
@@ -234,10 +207,12 @@ def chat_with_claude(message, session_id=None):
     
     # Chuẩn bị dữ liệu yêu cầu
     payload = {
-        "messages": [{"role": "user", "content": message}],
-        "session_id": session_id,
-        "prompt_type": "default"  # Có thể thay đổi thành "programming", "writing", "education"
+        "messages": [{"role": "user", "content": message}]
     }
+    
+    # Thêm session_id nếu có
+    if session_id:
+        payload["session_id"] = session_id
     
     # Gửi yêu cầu POST
     response = requests.post(url, json=payload)
@@ -272,8 +247,7 @@ curl http://localhost:8000/
 curl -X POST http://localhost:8000/chat \
   -H "Content-Type: application/json" \
   -d '{
-    "messages": [{"role": "user", "content": "Xin chào, bạn là ai?"}],
-    "prompt_type": "default"
+    "messages": [{"role": "user", "content": "Xin chào, bạn là ai?"}]
   }'
 
 # Lấy danh sách các loại prompt có sẵn
@@ -292,16 +266,21 @@ const API_URL = "http://localhost:8000";
 // Hàm gửi tin nhắn và nhận phản hồi
 async function chatWithClaude(message, sessionId = null) {
   try {
+    const payload = {
+      messages: [{ role: 'user', content: message }]
+    };
+    
+    // Thêm session_id nếu có
+    if (sessionId) {
+      payload.session_id = sessionId;
+    }
+    
     const response = await fetch(`${API_URL}/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        messages: [{ role: 'user', content: message }],
-        session_id: sessionId,
-        prompt_type: 'default'
-      }),
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
