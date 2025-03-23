@@ -2,7 +2,7 @@
 
 ## Giới thiệu (Introduction)
 
-Dự án này tạo ra một API Server sử dụng Claude 3.7, PydanticAI, FastAPI và Logfire. API Server có khả năng xử lý yêu cầu chat từ người dùng, quản lý phiên hội thoại, và tạo ra phản hồi thông minh từ Claude 3.7.
+Dự án này tạo ra một API Server sử dụng Claude 3.7, PydanticAI, LangGraph, FastAPI và Logfire. API Server có khả năng xử lý yêu cầu chat từ người dùng, quản lý phiên hội thoại, và tạo ra phản hồi thông minh từ Claude 3.7.
 
 This project creates an API Server using Claude 3.7, PydanticAI, FastAPI, and Logfire. The API server can process chat requests from users, manage conversation sessions, and generate intelligent responses from Claude 3.7.
 
