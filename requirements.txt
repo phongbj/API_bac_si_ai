@@ -1,11 +1,37 @@
+# core frameworks
+fastapi
+uvicorn
+starlette
+jinja2
+pandas
+# AI / agent
 anthropic
 pydantic
 pydantic-ai
 langgraph
 logfire
-python-dotenv
-fastapi
-uvicorn
+
+# HTTP clients
 httpx
-starlette
-jinja2
+
+# config & env
+python-dotenv
+
+# data science / ML
+numpy
+faiss-cpu      # hoặc faiss nếu bạn đã build từ source
+scikit-learn
+opencv-python
+Pillow         # PIL
+ultralytics    # YOLO library
+
+# auth / security
+python-jose
+passlib[bcrypt]
+
+# file uploads / static
+python-multipart
+aiofiles       # để serve static files với FastAPI
+
+# (tuỳ chọn) nếu bạn muốn chạy uvicorn với full feature set:
+# uvicorn[standard]

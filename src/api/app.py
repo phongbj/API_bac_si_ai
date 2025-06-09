@@ -393,7 +393,7 @@ async def detect_objects(
         le=1.0,
         description="Ngưỡng confidence (0.0 - 1.0) để YOLO lọc các box có độ tin cậy thấp hơn"
     ),
-    user: str = Depends(get_current_user)  # Nếu cần auth, bỏ comment
+    #user: str = Depends(get_current_user)  # Nếu cần auth, bỏ comment
 ):
     try:
         image_id = str(uuid.uuid4())
@@ -439,7 +439,7 @@ async def detect_objects(
 @app.post("/medical/classify")
 async def classify_image(
     file: UploadFile = File(...),
-    user: str = Depends(get_current_user)  # Nếu cần auth, bỏ comment
+    #user: str = Depends(get_current_user)  # Nếu cần auth, bỏ comment
 ):
     try:
         image_id = str(uuid.uuid4())
@@ -488,7 +488,7 @@ async def classify_image(
 @app.post("/medical/segment")
 async def segment_image(
     file: UploadFile = File(...),
-    user: str = Depends(get_current_user)  # Nếu cần auth, bỏ comment
+    #user: str = Depends(get_current_user)  # Nếu cần auth, bỏ comment
 ):
     try:
         image_id = str(uuid.uuid4())
