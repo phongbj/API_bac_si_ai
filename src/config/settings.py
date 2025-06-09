@@ -16,13 +16,15 @@ load_dotenv()
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 LOGFIRE_TOKEN = os.getenv("LOGFIRE_TOKEN")
 
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 # Cấu hình Claude
 CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "anthropic:claude-3-7-sonnet-20250219")
 
 # Cấu hình API Server
 API_HOST = os.getenv("API_HOST", "0.0.0.0")
 API_PORT = int(os.getenv("API_PORT", "8000"))
-API_TITLE = "Claude Agent API"
+API_TITLE = "Gemini Agent API"
 API_DESCRIPTION = "API server for Claude 3.7 agent"
 API_VERSION = "1.0.0"
 
@@ -33,4 +35,4 @@ CORS_ALLOW_METHODS = ["*"]
 CORS_ALLOW_HEADERS = ["*"]
 
 # Cấu hình Logfire
-LOGFIRE_SERVICE_NAME = "claude-agent-api"
+LOGFIRE_SERVICE_NAME = "gemini-agent-api"

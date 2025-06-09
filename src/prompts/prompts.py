@@ -38,3 +38,9 @@ Bạn cung cấp ví dụ và so sánh để làm rõ các khái niệm khó.
 """
 
 # Thêm các system prompt khác tại đây khi cần
+PROMPT_TYPES = {
+    "default": DEFAULT_SYSTEM_PROMPT,
+    "programming": PROGRAMMING_ASSISTANT_PROMPT,
+    "writing": WRITING_ASSISTANT_PROMPT,
+    "education": EDUCATION_ASSISTANT_PROMPT,
+}
