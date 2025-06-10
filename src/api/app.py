@@ -19,6 +19,7 @@ from ultralytics import YOLO
 from fastapi import (
     FastAPI,
     File,
+    Form,
     Query,
     UploadFile,
     HTTPException,
@@ -387,24 +388,26 @@ if not os.path.exists(IMAGE_DIR):
 @app.post("/medical/detect")
 async def detect_objects(
     file: UploadFile = File(...),
-    confidence: float = Query(
+    confidence: float = Form(
         0.25,
         ge=0.0,
         le=1.0,
         description="Ngưỡng confidence (0.0 - 1.0) để YOLO lọc các box có độ tin cậy thấp hơn"
     ),
-    #user: str = Depends(get_current_user)  # Nếu cần auth, bỏ comment
+    # user: str = Depends(get_current_user)  # Nếu cần auth
 ):
     try:
+        # Lưu file
         image_id = str(uuid.uuid4())
         ext = os.path.splitext(file.filename)[1]
         image_path = os.path.join(IMAGE_DIR, f"{image_id}{ext}")
-
         with open(image_path, "wb") as f:
             f.write(await file.read())
 
+        # Gọi YOLO với confidence lấy từ form
         results = detection_model.predict(source=image_path, conf=confidence)
 
+        # Xây dựng response
         detections = []
         for result in results:
             for box in result.boxes:
@@ -417,9 +420,9 @@ async def detect_objects(
                     "bbox": [round(coord, 2) for coord in bbox]
                 })
 
+        # Tạo ảnh annotated
         r = results[0]
         annotated_bgr = r.plot().astype(np.uint8)
-
         annotated_filename = f"{image_id}_annotated{ext}"
         annotated_path = os.path.join(IMAGE_DIR, annotated_filename)
         cv2.imwrite(annotated_path, annotated_bgr)
